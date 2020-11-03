@@ -52,19 +52,37 @@ class _HomePageState extends State<HomePage> {
       ),
       body: _loading
           ? Center(child: Container(child: CircularProgressIndicator()))
-          : Container(
-              height: 70.0,
-              child: ListView.builder(
-                itemCount: categories.length,
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return CategoryTile(
-                    imageAssetUrl: categories[index].imageAssetUrl,
-                    categorieName: categories[index].categorieName,
-                  );
-                },
-              ),
+          : Column(
+              children: [
+                Container(
+                  height: 70.0,
+                  child: ListView.builder(
+                    itemCount: categories.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return CategoryTile(
+                        imageAssetUrl: categories[index].imageAssetUrl,
+                        categorieName: categories[index].categorieName,
+                      );
+                    },
+                  ),
+                ),
+                Container(
+                
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: articles.length,
+                    itemBuilder: (context, index) {
+                      return BlogTile(
+                        imageUrl: articles[index].urlToImage,
+                        title: articles[index].title,
+                        desc: articles[index].description,
+                      );
+                    },
+                  ),
+                )
+              ],
             ),
     );
   }
